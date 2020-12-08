@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">웹드 저장소</a>
+          <a class="navbar-brand" style="cursor:pointer;" @click="mainMove">웹드 저장소</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,14 +19,15 @@
             <li class="active">
               <a>youtube</a>
             </li>
-            <li><a>인터넷</a></li>
+            <!-- <li><a>인터넷</a></li> -->
             <li class="dropdown">
-              <a class="dropdown-toggle">너를 위한<span class="caret"></span></a>
+              <a class="dropdown-toggle">고객 센터<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a>공지사항</a></li>
                 <li><a>게시 놀이터</a></li>
               </ul>
             </li>
+            <li class="statisticsBtn" @click="statisticsMove"><a>통계</a></li>
           </ul>
           <form class="navbar-left searchForm">
             <div class="searchDiv">
@@ -54,7 +55,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    statisticsMove() {
+      this.$router.push({ name: 'statistics' });
+      this.$router.push({ name: 'popular' });
+    },
+    mainMove() {
+      this.$router.push({ name: 'main' });
+    }
+  }
+};
 </script>
 
 <style>
@@ -70,7 +81,7 @@ export default {};
 }
 @media (min-width: 768px) {
   .searchForm {
-    width: 430px;
+    width: 365px;
     padding-top: 0;
     padding-bottom: 0;
     margin-right: 0;
@@ -81,5 +92,8 @@ export default {};
 }
 .searchDiv {
   float: right;
+}
+.statisticsBtn {
+  cursor: pointer;
 }
 </style>

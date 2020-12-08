@@ -6,9 +6,4 @@ export default [
     name: 'main',
     component: loadView('Main')
   }
-  // {
-  //   path: '/Login',
-  //   name: 'login',
-  //   component: loadView('main/Login')
-  // }
 ];

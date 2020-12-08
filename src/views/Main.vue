@@ -7,7 +7,7 @@
       <div class="listArea">
         <div class="listBox" v-for="(wdDes, i) in defaultData" :key="i">
           <div class="titleImg">
-            <div class="imgDiv" @click="moveWebDrama(wdDes.imgMoveRoute)">
+            <div class="imgDiv" @click="moveWebDrama(wdDes.imgMoveRoute, wdDes.wdTitle, wdDes.wdCode)">
               <img :src="wdDes.imgRoute" class="img-rounded" />
             </div>
             <div class="explanationBox">
@@ -58,7 +58,8 @@ import { mapState } from 'vuex';
 export default {
   data: () => ({
     fold: '',
-    test: []
+    test: [],
+    testImg: ''
   }),
   computed: {
     exFold() {
@@ -66,7 +67,8 @@ export default {
     },
     ...mapState('searchList', {
       defaultData: ({ defaultData }) => defaultData,
-      webSubDes: ({ webSubDes }) => webSubDes
+      webSubDes: ({ webSubDes }) => webSubDes,
+      imgRoute1: ({ imgRoute1 }) => imgRoute1
     })
   },
   created() {
@@ -89,8 +91,9 @@ export default {
       // let sss = this.data.filter(data => data.value === show);
       test.innerHTML = `${show}`;
     },
-    moveWebDrama(move) {
+    moveWebDrama(move, title, code) {
       window.open(move);
+      this.$store.dispatch('searchList/setClick', { stTitle: title, stCode: code });
     },
     startData() {
       this.$store.dispatch('searchList/getData');

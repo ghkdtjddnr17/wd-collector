@@ -1,5 +1,7 @@
 export default {
   searchFilter: [],
   defaultData: [],
-  webSubDes: []
+  webSubDes: [],
+  imgRoute1: [],
+  rank: []
 };

@@ -7,5 +7,11 @@ export default {
   },
   webSubDes(state, payload) {
     state.webSubDes = payload;
+  },
+  imgRoute1(state, payload) {
+    state.imgRoute1 = payload;
+  },
+  rank(state, payload) {
+    state.rank = payload;
   }
 };
