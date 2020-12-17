@@ -1,6 +1,6 @@
 import { GET } from '@/utils';
 
-const urlHeader = 'http://localhost:8383';
+const urlHeader = 'http://192.168.0.2:8383';
 export default {
   async getSearchFilter(store, payload) {
     let search = [];

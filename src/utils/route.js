@@ -1,1 +1,1 @@
-export const loadView = view => () => import(/* webpackChunkName: "alpasQ" */ `@/views/${view}.vue`);
+export const loadView = view => () => import(/* webpackChunkName: "" */ `@/views/${view}.vue`);

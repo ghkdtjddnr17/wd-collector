@@ -73,6 +73,7 @@ export default {
   },
   created() {
     this.startData();
+    console.log(BASE_URL);
   },
   methods: {
     foldBtn(code) {

@@ -8,14 +8,14 @@
       </div>
       <ul class="menuList">
         <li @click="tabMenu">
-          <a class="title">인기순위</a>
+          <a class="title">인기 순위</a>
         </li>
         <li>
-          <a class="title">방문자수</a>
+          <a class="title">추천 순위</a>
         </li>
-        <li>
+        <!-- <li>
           <a class="title">댓글 순위</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

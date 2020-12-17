@@ -4,30 +4,30 @@
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
+          </button> -->
           <a class="navbar-brand" style="cursor:pointer;" @click="mainMove">웹드 저장소</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li :class="active('youtube')" @click="click('youtube')">
               <a>youtube</a>
             </li>
-            <!-- <li><a>인터넷</a></li> -->
+            <li :class="active('statistics')" class="statisticsBtn" @click="statisticsMove('statistics')">
+              <a>통계</a>
+            </li>
             <li class="dropdown">
               <a class="dropdown-toggle">고객 센터<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a>공지사항</a></li>
-                <li><a>게시 놀이터</a></li>
+                <li><a>게시놀이터</a></li>
               </ul>
             </li>
-            <li class="statisticsBtn" @click="statisticsMove"><a>통계</a></li>
           </ul>
           <form class="navbar-left searchForm">
             <div class="searchDiv">
@@ -56,13 +56,27 @@
 
 <script>
 export default {
+  data: () => ({
+    headerTtitle: [{ name: 'youtube' }, { name: '고객 센터' }, { name: '통계' }],
+    clickActive: ''
+  }),
+  computed: {
+    active() {
+      return clickActive => this.clickActive === clickActive && 'active';
+    }
+  },
   methods: {
-    statisticsMove() {
+    statisticsMove(click) {
       this.$router.push({ name: 'statistics' });
       this.$router.push({ name: 'popular' });
+      this.clickActive = click;
     },
     mainMove() {
       this.$router.push({ name: 'main' });
+    },
+    click(click) {
+      this.$router.push({ name: 'main' });
+      this.clickActive = click;
     }
   }
 };
@@ -94,6 +108,9 @@ export default {
   float: right;
 }
 .statisticsBtn {
+  cursor: pointer;
+}
+.navbar-nav > li {
   cursor: pointer;
 }
 </style>
