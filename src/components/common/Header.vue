@@ -15,19 +15,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li :class="active('youtube')" @click="click('youtube')">
+            <li v-for="(headerName, i) in headerTtitle" :key="i" :class="active(headerName.name)" @click="statisticsMove(headerName.code)">
+              <a>{{ headerName.name }}</a>
+            </li>
+            <!-- <li :class="active('youtube')" @click="click('youtube')">
               <a>youtube</a>
+            </li>
+            <li :class="active('free')" @click="click('free')" class="dropdown">
+              <a class="dropdown-toggle" @click="moveBoard">자유게시판</a>
             </li>
             <li :class="active('statistics')" class="statisticsBtn" @click="statisticsMove('statistics')">
               <a>통계</a>
-            </li>
-            <li class="dropdown">
-              <a class="dropdown-toggle">고객 센터<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a>공지사항</a></li>
-                <li><a>게시놀이터</a></li>
-              </ul>
-            </li>
+            </li> -->
           </ul>
           <form class="navbar-left searchForm">
             <div class="searchDiv">
@@ -35,15 +34,27 @@
             </div>
             <!-- <button type="submit" class="btn btn-default">Submit</button> -->
           </form>
-          <ul class="nav navbar-nav navbar-right">
+
+          <ul v-if="loginCheckSession" class="nav navbar-nav navbar-right">
             <li>
-              <a>로그인</a>
+              <a>{{ userName.userName }}님 환영합니다.</a>
             </li>
             <li>
               <a>|</a>
             </li>
             <li>
-              <a>회원가입</a>
+              <a @click="loginOut">로그아웃</a>
+            </li>
+          </ul>
+          <ul v-else class="nav navbar-nav navbar-right">
+            <li>
+              <a @click="moveLogin">로그인</a>
+            </li>
+            <li>
+              <a>|</a>
+            </li>
+            <li>
+              <a @click="moveJoin">회원가입</a>
             </li>
           </ul>
         </div>
@@ -57,9 +68,20 @@
 <script>
 export default {
   data: () => ({
-    headerTtitle: [{ name: 'youtube' }, { name: '고객 센터' }, { name: '통계' }],
-    clickActive: ''
+    headerTtitle: [
+      { name: 'youtube', code: 'main' },
+      { name: '자유게시판', code: 'board' },
+      { name: '공지사항', code: 'notice' },
+      { name: '통계', code: 'popular' }
+    ],
+    clickActive: '',
+    loginCheckSession: '',
+    userName: ''
   }),
+  created() {
+    this.loginCheckSession = sessionStorage.getItem('loginCheck');
+    this.userName = JSON.parse(sessionStorage.getItem('loginInfo'));
+  },
   computed: {
     active() {
       return clickActive => this.clickActive === clickActive && 'active';
@@ -67,8 +89,8 @@ export default {
   },
   methods: {
     statisticsMove(click) {
-      this.$router.push({ name: 'statistics' });
-      this.$router.push({ name: 'popular' });
+      this.$router.push({ name: click });
+      // this.$router.push({ name: 'popular' });
       this.clickActive = click;
     },
     mainMove() {
@@ -77,6 +99,20 @@ export default {
     click(click) {
       this.$router.push({ name: 'main' });
       this.clickActive = click;
+    },
+    moveBoard() {
+      this.$router.push({ name: 'board' });
+    },
+    moveLogin() {
+      this.$router.push({ name: 'login' });
+    },
+    loginOut() {
+      sessionStorage.removeItem('loginCheck');
+      sessionStorage.removeItem('loginInfo');
+      location.reload();
+    },
+    moveJoin() {
+      this.$router.push({ name: 'memberJoin' });
     }
   }
 };
@@ -95,7 +131,7 @@ export default {
 }
 @media (min-width: 768px) {
   .searchForm {
-    width: 365px;
+    width: 225px;
     padding-top: 0;
     padding-bottom: 0;
     margin-right: 0;

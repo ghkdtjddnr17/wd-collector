@@ -3,5 +3,9 @@ export default {
   defaultData: [],
   webSubDes: [],
   imgRoute1: [],
-  rank: []
+  rank: [],
+  loginInfo: [],
+  loginCheck: false,
+  userInfoCheck: null,
+  userInfoNickCheck: null
 };

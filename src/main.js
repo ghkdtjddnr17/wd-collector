@@ -1,8 +1,8 @@
+import '@babel/polyfill';
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import '@babel/polyfill';
 import axios from 'axios';
 import VueLodash from 'vue-lodash';
 import lodash from 'lodash';
@@ -11,12 +11,14 @@ import { focus, visible } from './utils';
 import VueSplide from '@splidejs/vue-splide';
 import { $get, $post, $put, $delete } from './assets/js/utils';
 import vueEditor from 'vue2-editor';
+import VueConfirmDialog from 'vue-confirm-dialog';
 import 'vue2-datepicker/index.css';
 import './assets/css/bootstrap.css';
 
 Vue.use(vueEditor);
 Vue.use(VueSplide);
-
+Vue.use(VueConfirmDialog);
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.config.productionTip = false;
 Vue.prototype.$bus = new Vue();
 Vue.prototype.$http = axios;

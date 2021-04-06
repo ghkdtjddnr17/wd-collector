@@ -23,8 +23,7 @@
                   <span>조회수: {{ wdDes.clickCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}</span>
                 </li>
                 <li>
-                  <span
-                    >설명
+                  <span>
                     <div style="margin-top:3px;width:280px;height: 40px">
                       {{ wdDes.des }}
                     </div>
@@ -55,6 +54,7 @@
 
 <script>
 import { mapState } from 'vuex';
+
 export default {
   data: () => ({
     fold: '',
@@ -68,12 +68,15 @@ export default {
     ...mapState('searchList', {
       defaultData: ({ defaultData }) => defaultData,
       webSubDes: ({ webSubDes }) => webSubDes,
-      imgRoute1: ({ imgRoute1 }) => imgRoute1
+      imgRoute1: ({ imgRoute1 }) => imgRoute1,
+      loginCheck: ({ loginCheck }) => loginCheck
     })
   },
   created() {
     this.startData();
-    console.log(BASE_URL);
+    if (this.loginCheck === true) {
+      location.reload();
+    }
   },
   methods: {
     foldBtn(code) {
@@ -185,6 +188,7 @@ h5 {
   float: right;
   font-size: 10px;
   cursor: pointer;
+  padding-top: 25px;
 }
 .foldImg {
   margin-right: 5px;

@@ -13,5 +13,17 @@ export default {
   },
   rank(state, payload) {
     state.rank = payload;
+  },
+  loginInfo(state, payload) {
+    state.loginInfo = payload;
+  },
+  loginCheck(state, payload) {
+    state.loginCheck = payload;
+  },
+  userInfoCheck(state, payload) {
+    state.userInfoCheck = payload;
+  },
+  userInfoNickCheck(state, payload) {
+    state.userInfoNickCheck = payload;
   }
 };

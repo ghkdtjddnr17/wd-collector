@@ -1,6 +1,6 @@
 import { GET } from '@/utils';
-
-const urlHeader = 'http://52.78.213.11:7777';
+import router from '../../../router';
+const urlHeader = 'http://localhost:8383';
 export default {
   async getSearchFilter(store, payload) {
     let search = [];
@@ -8,7 +8,6 @@ export default {
     try {
       const data = await GET(url, payload);
       search = data.localCode;
-      console.log(search);
     } catch (error) {
       console.warn(error.message, error);
     }
@@ -25,7 +24,6 @@ export default {
       webDrama.forEach(data => {
         imgRoute1.push(data.imgRoute);
       });
-      console.log(imgRoute1);
     } catch (error) {
       console.warn(error.message, error);
     }
@@ -37,7 +35,7 @@ export default {
     const url = `${urlHeader}` + '/wdList/sub';
     try {
       const data = await GET(url, payload);
-      console.log(data);
+
       webSubDes = data.subDes;
     } catch (error) {
       console.warn(error.message, error);
@@ -64,5 +62,64 @@ export default {
       console.warn(error.message, error);
     }
     store.commit('rank', rank);
+  },
+  async login(store, payload) {
+    let loginInfo = [];
+    const url = `${urlHeader}` + '/loginCheck';
+    try {
+      const data = await GET(url, payload);
+      loginInfo = data.content[0];
+      if (loginInfo) {
+        store.commit('loginCheck', true);
+        store.commit('loginInfo', loginInfo);
+        router.push({ name: 'main' });
+      } else {
+        alert('로그인 정보가 없습니다. 다시 확인해주세요.');
+      }
+      console.log(loginInfo);
+    } catch (error) {
+      console.warn(error.message, error);
+    }
+  },
+  async userInfoCheck(store, payload) {
+    let result;
+    const url = `${urlHeader}` + '/check';
+    try {
+      const data = await GET(url, payload);
+      result = data;
+
+      console.log(data);
+    } catch (error) {
+      console.warn(error.message, error);
+    }
+    store.commit('userInfoCheck', result);
+  },
+  async userInfoNickCheck(store, payload) {
+    let result;
+    const url = `${urlHeader}` + '/check';
+    try {
+      const data = await GET(url, payload);
+      result = data;
+
+      console.log(data);
+    } catch (error) {
+      console.warn(error.message, error);
+    }
+    store.commit('userInfoNickCheck', result);
+  },
+  async memberJoinOk(store, payload) {
+    let result;
+    const url = `${urlHeader}` + '/memberJoin';
+    try {
+      const data = await GET(url, payload);
+      result = data;
+      if (result === 1) {
+        alert('회원가입 되었습니다!!');
+        router.push({ name: 'main' });
+      }
+      console.log(data);
+    } catch (error) {
+      console.warn(error.message, error);
+    }
   }
 };

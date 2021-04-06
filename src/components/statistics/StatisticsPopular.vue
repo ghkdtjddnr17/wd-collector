@@ -78,7 +78,7 @@ export default {
 }
 .searchRankTitle > input {
   height: 35px;
-  border: none;
+  border: 1px solid #eee;
   border-radius: 4px;
 }
 .tableHeader > th {
@@ -96,7 +96,8 @@ export default {
   /* border: 1px solid #eee; */
   margin-bottom: 20px;
   border-radius: 5px;
-  background-image: linear-gradient(45deg, #6c2bff 0%, #2840ff 40%, #2bbcff 80%, #2bc1ff 85%);
+  background-color: #fafafc;
+  /* background-image: linear-gradient(45deg, #6c2bff 0%, #2840ff 40%, #2bbcff 80%, #2bc1ff 85%); */
   box-shadow: 1px 1px #eee;
 }
 .datePicker {

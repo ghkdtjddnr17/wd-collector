@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <vue-confirm-dialog></vue-confirm-dialog>
     <router-view />
   </div>
 </template>
